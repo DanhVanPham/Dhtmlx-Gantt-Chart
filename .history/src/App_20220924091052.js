@@ -15,7 +15,7 @@ const data = {
 };
 class App extends Component {
     state = {
-        currentZoom: 'Months',
+        currentZoom: 'Days',
         messages: [],
     };
 

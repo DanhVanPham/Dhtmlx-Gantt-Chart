@@ -15,7 +15,7 @@ const data = {
 };
 class App extends Component {
     state = {
-        currentZoom: 'Months',
+        currentZoom: 'Days',
         messages: [],
     };
 
@@ -61,7 +61,6 @@ class App extends Component {
                     <Gantt
                         tasks={data}
                         zoom={currentZoom}
-                        onDataUpdated ={ this.logDataUpdate }
                     />
                 </div>
                 <MessageArea

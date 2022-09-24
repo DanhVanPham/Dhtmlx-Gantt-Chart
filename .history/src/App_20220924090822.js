@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Gantt from './components/Gantt';
 import Toolbar from './components/Toolbar';
-import MessageArea from './components/MessageArea';
 import './App.css';
 
 const data = {
@@ -15,7 +14,7 @@ const data = {
 };
 class App extends Component {
     state = {
-        currentZoom: 'Months',
+        currentZoom: 'Days',
         messages: [],
     };
 
@@ -48,7 +47,7 @@ class App extends Component {
         });
     }
     render() {
-        const { currentZoom, messages } = this.state;
+        const { currentZoom } = this.state;
         return (
             <div>
                 <div className="zoom-bar">
@@ -61,12 +60,8 @@ class App extends Component {
                     <Gantt
                         tasks={data}
                         zoom={currentZoom}
-                        onDataUpdated ={ this.logDataUpdate }
                     />
                 </div>
-                <MessageArea
-                    messages={ messages }
-                />
             </div>
         );
     }

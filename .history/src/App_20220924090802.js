@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Gantt from './components/Gantt';
 import Toolbar from './components/Toolbar';
-import MessageArea from './components/MessageArea';
 import './App.css';
 
 const data = {
@@ -15,32 +14,9 @@ const data = {
 };
 class App extends Component {
     state = {
-        currentZoom: 'Months',
+        currentZoom: 'Days',
         messages: [],
     };
-
-    addMessage(message) {
-        const maxLogLength = 5;
-        const newMessage = { message };
-        const messages = [
-            newMessage,
-            ...this.state.messages
-        ];
-    
-        if (messages.length > maxLogLength) {
-            messages.length = maxLogLength;
-        }
-        this.setState({ messages });
-    }
-
-    logDataUpdate = (entityType, action, itemData, id) => {
-        let text = itemData && itemData.text ? ` (${itemData.text})`: '';
-        let message = `${entityType} ${action}: ${id} ${text}`;
-        if (entityType === 'link' && action !== 'delete' ) {
-            message += ` ( source: ${itemData.source}, target: ${itemData.target} )`;
-        }
-        this.addMessage(message);
-    }
      
     handleZoomChange = (zoom) => {
         this.setState({
@@ -48,7 +24,7 @@ class App extends Component {
         });
     }
     render() {
-        const { currentZoom, messages } = this.state;
+        const { currentZoom } = this.state;
         return (
             <div>
                 <div className="zoom-bar">
@@ -61,12 +37,8 @@ class App extends Component {
                     <Gantt
                         tasks={data}
                         zoom={currentZoom}
-                        onDataUpdated ={ this.logDataUpdate }
                     />
                 </div>
-                <MessageArea
-                    messages={ messages }
-                />
             </div>
         );
     }
